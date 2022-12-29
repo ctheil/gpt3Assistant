@@ -1,0 +1,16 @@
+// const getChatbotResponse = async (message) => {
+//   console.log("enter fn");
+//   // const response = await openai.completion.create({
+//   //   prompt: message,
+//   //   model: "chatbot",
+//   //   max_tokens: 2048,
+//   //   temperature: 0.5,
+//   // });
+//   const response = await openai.completion.create({
+//     model: "text-davinci-002",
+//     prompt: message,
+//     temperature: 0.5,
+//   });
+//   console.log("return response?");
+//   return response;
+// };
