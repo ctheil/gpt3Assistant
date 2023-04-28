@@ -6,7 +6,7 @@ It then morphed into a professional playground that prompts GPT for completions 
 type of graded response based on a tutors currated asnwer to the initial question. The structure for the initial prompt and the requested response format
 was very fun to develop:
 
-```
+```js
 const res = {
    text:
      "\n" +
