@@ -1,23 +1,34 @@
-# gpt3Assistant
+# GPT-3 Assistant
 
-This playground application started as a project to enable conversations with GPT vis SMS text message. It utilizes Twillio and the OpenAI API to requetst completions based on SMS prompts.
+A dynamic application designed to facilitate conversations with OpenAI's GPT-3 model via SMS text messages. Initially, it was built to enable simple interactions using Twilio and the OpenAI API. However, it evolved into a more sophisticated tool for educational purposes.
+## Features
+### SMS Conversations with GPT-3
+- Utilizes Twilio to send and receive SMS messages.
+- Integrates with the OpenAI API to fetch completions based on SMS prompts.
+### Automated Grading for Asynchronous Quizzes
+- Prompts GPT-3 for completions based on student responses to quiz questions.
+- Returns a graded response, comparing the student's answer to a tutor-curated answer key.
+### Dynamic Prompt Generation
 
-It then morphed into a professional playground that prompts GPT for completions based on student responses to async quiz questions, and returns a 
-type of graded response based on a tutors currated asnwer to the initial question. The structure for the initial prompt and the requested response format
-was very fun to develop:
+The application uses a unique structure to generate prompts for GPT-3, ensuring clarity and precision in the model's responses. The `generatePrompt` function sets up the question, provides an answer key, and structures the desired response format.
 
-```js
+```javascript
 const generatePrompt = (q, aKey, res) => {
   //Generates the initial instructions and sets up the question
+
   const qInstructions = "Given the question: \n";
+
   // provides the answer key GPT will reference
   // this will be provide and curated by the SL Leader
+
   const aKeyInstructions = "\n and this answer key: \n";
+
   // sets up the response wanted from chatGPT. 
   // Asks for an initial FLOAT to determine the correctness of the answer in percentage
   // then asks for a general explanation of the answer
   // then provides feedback as to why the response was correct or incorrect, 
   // and what went well vs poorly.
+
   const resInstructions =
     "\n provide in the first message the correctness of this response with a floating point value between 0 and 1 
     like this '<rating>0.5</rating>'. 
@@ -29,6 +40,7 @@ const generatePrompt = (q, aKey, res) => {
   // concats everything into string and adds quotes around dynamic elements
   // to differentiate between talking directly to GPT and plugging in info. 
   // Commands are left unquoted and data-to-analyze is quoted.
+
   const string =
     qInstructions +
     `"${q}"` +
@@ -40,7 +52,16 @@ const generatePrompt = (q, aKey, res) => {
 };
 ```
 
-```js
+
+
+The response structure includes:
+- A rating indicating the correctness of the answer (between 0 and 1).
+- A reasoning for the given rating.
+- Specific feedback on the correctness of the response, areas of improvement, and aspects done well.
+## Sample Response
+
+```javascript
+
 const res = {
    text:
      "\n" +
@@ -55,5 +76,5 @@ const res = {
    index: 0,
    logprobs: null,
    finish_reason: "stop",
- }
+ };
 ```
